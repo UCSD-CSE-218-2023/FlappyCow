@@ -285,7 +285,7 @@ public class GameView extends SurfaceView {
             powerUps.add(new Coin(this, gameActivity));
         }
 
-        if ((powerUps.size() < 1) && (Math.random() * 100 < 50)) {
+        if ((powerUps.size() < 1) && (Math.random() * 100 < 10)) {
             // If no powerUp is present and 20% chance (if also no coin)
             powerUps.add(new Virus(this, gameActivity));
         }
