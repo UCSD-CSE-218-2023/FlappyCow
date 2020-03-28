@@ -51,6 +51,8 @@ public class AccomplishmentBox {
      * The accomblishments will be saved local via SharedPreferences.
      * This makes it very easy to cheat.
      *
+     * todo: is activity the right thing to pass in here?
+     *
      * @param activity activity that is needed for shared preferences
      */
     public void save(Activity activity) {

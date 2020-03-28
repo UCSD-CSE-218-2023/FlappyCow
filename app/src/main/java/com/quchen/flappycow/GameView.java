@@ -14,17 +14,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.quchen.flappycow.GameActivity.MyHandler;
-import com.quchen.flappycow.sprites.Background;
-import com.quchen.flappycow.sprites.Coin;
-import com.quchen.flappycow.sprites.Cow;
-import com.quchen.flappycow.sprites.Frontground;
-import com.quchen.flappycow.sprites.NyanCat;
-import com.quchen.flappycow.sprites.Obstacle;
-import com.quchen.flappycow.sprites.PauseButton;
-import com.quchen.flappycow.sprites.PlayableCharacter;
-import com.quchen.flappycow.sprites.PowerUp;
-import com.quchen.flappycow.sprites.Toast;
-import com.quchen.flappycow.sprites.Tutorial;
+import com.quchen.flappycow.sprites.*;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -294,6 +284,11 @@ public class GameView extends SurfaceView {
             // If no powerUp is present and 20% chance
             powerUps.add(new Coin(this, gameActivity));
         }
+
+        if ((powerUps.size() < 1) && (Math.random() * 100 < 50)) {
+            // If no powerUp is present and 20% chance (if also no coin)
+            powerUps.add(new Virus(this, gameActivity));
+        }
     }
 
     /**
@@ -384,6 +379,10 @@ public class GameView extends SurfaceView {
 
         gameActivity.musicShouldPlay = true;
         GameActivity.musicPlayer.start();
+    }
+
+    public void changeToSick() {
+        this.player.wearMask();
     }
 
     /**

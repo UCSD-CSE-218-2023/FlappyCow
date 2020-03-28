@@ -193,6 +193,10 @@ public class GameActivity extends Activity {
         }
     }
 
+    public void decreaseCoin() {
+        this.coins--;
+    }
+
     /**
      * What should happen, when an obstacle is passed?
      */

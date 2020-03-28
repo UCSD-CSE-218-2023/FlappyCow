@@ -17,13 +17,16 @@ and downloaded important stuff via SDK Manager (like newest Android API).
 
 ---
 
-This gameActivity features the Google Play Services with a leaderboard and achievements.
+**Note from TA:** I removed this. Don't worry about it.
+
+~~This gameActivity features the Google Play Services with a leaderboard and achievements.
 Those will not work out of the box for you.
 Because the IDs for that features (res/values/ids.xml) come from my google developer account
-and will only work with the apk signed by me. (You will get an error when trying to sign in)
+and will only work with the apk signed by me. (You will get an error when trying to sign in)~~
 
-So you need to add your own gameActivity to the play services in the [Google Play developer
-console](https://play.google.com/apps/publish/) or remove this feature from the gameActivity.
+
+~~So you need to add your own gameActivity to the play services in the [Google Play developer
+console](https://play.google.com/apps/publish/) or remove this feature from the gameActivity.~~
 
 ---
 
