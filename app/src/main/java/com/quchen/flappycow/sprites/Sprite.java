@@ -7,7 +7,7 @@
 
 package com.quchen.flappycow.sprites;
 
-import com.quchen.flappycow.Game;
+import com.quchen.flappycow.GameActivity;
 import com.quchen.flappycow.GameView;
 
 import android.graphics.Bitmap;
@@ -53,11 +53,11 @@ public abstract class Sprite {
     protected GameView view;
     
     /** The context */
-    protected Game game;
+    protected GameActivity gameActivity;
     
-    public Sprite(GameView view, Game game){
+    public Sprite(GameView view, GameActivity gameActivity){
         this.view = view;
-        this.game = game;
+        this.gameActivity = gameActivity;
         frameTime = 1;
         src = new Rect();
         dst = new Rect();
@@ -236,7 +236,7 @@ public abstract class Sprite {
      */
     private int getCollisionTolerance(){
         // 25 @ 720x1280 px
-        return game.getResources().getDisplayMetrics().heightPixels / 50;
+        return gameActivity.getResources().getDisplayMetrics().heightPixels / 50;
     }
 
 }

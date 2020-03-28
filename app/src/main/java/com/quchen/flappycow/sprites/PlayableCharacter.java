@@ -7,15 +7,15 @@
 
 package com.quchen.flappycow.sprites;
 
-import com.quchen.flappycow.Game;
+import com.quchen.flappycow.GameActivity;
 import com.quchen.flappycow.GameView;
 
 public abstract class PlayableCharacter extends Sprite {
     
     protected boolean isDead = false;
     
-    public PlayableCharacter(GameView view, Game game) {
-        super(view, game);
+    public PlayableCharacter(GameView view, GameActivity gameActivity) {
+        super(view, gameActivity);
         move();
     }
     

@@ -7,12 +7,12 @@
 
 package com.quchen.flappycow.sprites;
 
-import com.quchen.flappycow.Game;
+import com.quchen.flappycow.GameActivity;
 import com.quchen.flappycow.GameView;
 
 public abstract class PowerUp extends Sprite {
-    public PowerUp(GameView view, Game game) {
-        super(view, game);
+    public PowerUp(GameView view, GameActivity gameActivity) {
+        super(view, gameActivity);
         init();
     }
     

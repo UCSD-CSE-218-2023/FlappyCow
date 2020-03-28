@@ -7,7 +7,7 @@
 
 package com.quchen.flappycow.sprites;
 
-import com.quchen.flappycow.Game;
+import com.quchen.flappycow.GameActivity;
 import com.quchen.flappycow.GameView;
 import com.quchen.flappycow.MainActivity;
 import com.quchen.flappycow.R;
@@ -30,26 +30,26 @@ public class Cow extends PlayableCharacter {
     /** sunglasses, hats and stuff */
     private Accessory accessory;
 
-    public Cow(GameView view, Game game) {
-        super(view, game);
+    public Cow(GameView view, GameActivity gameActivity) {
+        super(view, gameActivity);
         if(globalBitmap == null){
-            globalBitmap = Util.getScaledBitmapAlpha8(game, R.drawable.cow);
+            globalBitmap = Util.getScaledBitmapAlpha8(gameActivity, R.drawable.cow);
         }
         this.bitmap = globalBitmap;
         this.width = this.bitmap.getWidth()/(colNr = 8);    // The image has 8 frames in a row
         this.height = this.bitmap.getHeight()/4;            // and 4 in a column
         this.frameTime = 3;        // the frame will change every 3 runs
-        this.y = game.getResources().getDisplayMetrics().heightPixels / 2;    // Startposition in in the middle of the screen
+        this.y = gameActivity.getResources().getDisplayMetrics().heightPixels / 2;    // Startposition in in the middle of the screen
         
         if(sound == -1){
-            sound = Game.soundPool.load(game, R.raw.cow, 1);
+            sound = GameActivity.soundPool.load(gameActivity, R.raw.cow, 1);
         }
         
-        this.accessory = new Accessory(view, game);
+        this.accessory = new Accessory(view, gameActivity);
     }
     
     private void playSound(){
-        Game.soundPool.play(sound, MainActivity.volume, MainActivity.volume, 0, 0, 1);
+        GameActivity.soundPool.play(sound, MainActivity.volume, MainActivity.volume, 0, 0, 1);
     }
 
     @Override
@@ -106,16 +106,16 @@ public class Cow extends PlayableCharacter {
     @Override
     public void revive() {
         super.revive();
-        this.accessory.setBitmap(Util.getScaledBitmapAlpha8(game, R.drawable.accessory_scumbag));
+        this.accessory.setBitmap(Util.getScaledBitmapAlpha8(gameActivity, R.drawable.accessory_scumbag));
     }
 
     @Override
     public void upgradeBitmap(int points) {
         super.upgradeBitmap(points);
         if(points == POINTS_TO_SIR){
-            this.accessory.setBitmap(Util.getScaledBitmapAlpha8(game, R.drawable.accessory_sir));
+            this.accessory.setBitmap(Util.getScaledBitmapAlpha8(gameActivity, R.drawable.accessory_sir));
         }else if(points == POINTS_TO_COOL){
-            this.accessory.setBitmap(Util.getScaledBitmapAlpha8(game, R.drawable.accessory_sunglasses));
+            this.accessory.setBitmap(Util.getScaledBitmapAlpha8(gameActivity, R.drawable.accessory_sunglasses));
         }
     }
     

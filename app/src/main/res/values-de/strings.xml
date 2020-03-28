@@ -6,7 +6,7 @@
 <resources>
     <string name="current_score">Dein Punktestand</string>
     <string name="best_score">Dein Rekord</string>
-    <string name="medaille">Medaille</string>
+    <string name="medal">Medal</string>
     <string name="play_button">Start to play</string>
     <string name="about_button">Über</string>
     <string name="about_back_button">Zurück</string>

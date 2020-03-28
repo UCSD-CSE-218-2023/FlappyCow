@@ -8,14 +8,14 @@
     <string name="current_score">Your score is</string>
     <string name="best_score">Your best score is</string>
     <string name="defaultscore" translatable="false">42</string>
-    <string name="medaille">Medaille</string>
+    <string name="medal">Medal</string>
     <string name="play_button">Start to play</string>
     <string name="about_button">about</string>
     <string name="about_back_button">back</string>
     <string name="revive_button">Revive for</string>
     <string name="revive_notice">Points won\'t be uploaded to the leaderboard</string>
     <string name="coins">coins</string>
-    <string name="medaille_image" translatable="false">Medaillenimage</string>
+    <string name="medal_image" translatable="false">Medal Image</string>
     <string name="mute_button">Mutes the sound</string>
     <string name="developer">Developer: Lars Harmsen</string>
     <string name="graphics">Graphics: Lars Harmsen</string>

@@ -9,7 +9,7 @@
 
 package com.quchen.flappycow.sprites;
 
-import com.quchen.flappycow.Game;
+import com.quchen.flappycow.GameActivity;
 import com.quchen.flappycow.GameView;
 import com.quchen.flappycow.R;
 import com.quchen.flappycow.Util;
@@ -25,17 +25,17 @@ public class NyanCat extends PlayableCharacter {
     /** The rainbow tail behind the cat */
     private Rainbow rainbow;
     
-    public NyanCat(GameView view, Game game) {
-        super(view, game);
+    public NyanCat(GameView view, GameActivity gameActivity) {
+        super(view, gameActivity);
         if(globalBitmap == null){
-            globalBitmap = Util.getScaledBitmapAlpha8(game, R.drawable.nyan_cat);
+            globalBitmap = Util.getScaledBitmapAlpha8(gameActivity, R.drawable.nyan_cat);
         }
         this.bitmap = globalBitmap;
         this.width = this.bitmap.getWidth();
         this.height = this.bitmap.getHeight()/2;
-        this.y = game.getResources().getDisplayMetrics().heightPixels / 2;
+        this.y = gameActivity.getResources().getDisplayMetrics().heightPixels / 2;
         
-        this.rainbow = new Rainbow(view, game);
+        this.rainbow = new Rainbow(view, gameActivity);
     }
     
     /**

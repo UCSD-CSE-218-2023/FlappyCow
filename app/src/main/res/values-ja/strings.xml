@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     @author Lars Harmsen
     Copyright (c) <2014> <Lars Harmsen - Quchen>
 -->
 <resources>
     <string name="current_score">あなた の スコア</string>
     <string name="best_score">あなた の いちばん スコア</string>
-    <string name="medaille">Medaille</string>
+    <string name="medal">Medal</string>
     <string name="play_button">Start to play</string>
     <string name="about_button">about</string>
     <string name="about_back_button">back</string>

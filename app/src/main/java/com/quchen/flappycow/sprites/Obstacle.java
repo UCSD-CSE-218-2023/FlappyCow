@@ -7,7 +7,7 @@
 
 package com.quchen.flappycow.sprites;
 
-import com.quchen.flappycow.Game;
+import com.quchen.flappycow.GameActivity;
 import com.quchen.flappycow.GameView;
 import com.quchen.flappycow.MainActivity;
 import com.quchen.flappycow.R;
@@ -24,16 +24,16 @@ public class Obstacle extends Sprite{
     /** Necessary so the onPass method is just called once */
     public boolean isAlreadyPassed = false;
 
-    public Obstacle(GameView view, Game game) {
-        super(view, game);
-        spider = new Spider(view, game);
-        log = new WoodLog(view, game);
+    public Obstacle(GameView view, GameActivity gameActivity) {
+        super(view, gameActivity);
+        spider = new Spider(view, gameActivity);
+        log = new WoodLog(view, gameActivity);
         
         if(collideSound == -1){
-            collideSound = Game.soundPool.load(game, R.raw.crash, 1);
+            collideSound = GameActivity.soundPool.load(gameActivity, R.raw.crash, 1);
         }
         if(passSound == -1){
-            passSound = Game.soundPool.load(game, R.raw.pass, 1);
+            passSound = GameActivity.soundPool.load(gameActivity, R.raw.pass, 1);
         }
         
         initPos();
@@ -45,7 +45,7 @@ public class Obstacle extends Sprite{
      * The vertical position is in a certain area random.
      */
     private void initPos(){
-        int height = game.getResources().getDisplayMetrics().heightPixels;
+        int height = gameActivity.getResources().getDisplayMetrics().heightPixels;
         int gab = height / 4 - view.getSpeedX();
         if(gab < height / 5){
             gab = height / 5;
@@ -54,8 +54,8 @@ public class Obstacle extends Sprite{
         int y1 = (height / 10) + random - spider.height;
         int y2 = (height / 10) + random + gab;
         
-        spider.init(game.getResources().getDisplayMetrics().widthPixels, y1);
-        log.init(game.getResources().getDisplayMetrics().widthPixels, y2);
+        spider.init(gameActivity.getResources().getDisplayMetrics().widthPixels, y1);
+        log.init(gameActivity.getResources().getDisplayMetrics().widthPixels, y2);
     }
 
     /**
@@ -117,15 +117,15 @@ public class Obstacle extends Sprite{
     public void onPass(){
         if(!isAlreadyPassed){
             isAlreadyPassed = true;
-            view.getGame().increasePoints();
-            Game.soundPool.play(passSound, MainActivity.volume/SOUND_VOLUME_DIVIDER, MainActivity.volume/SOUND_VOLUME_DIVIDER, 0, 0, 1);
+            view.getGameActivity().increasePoints();
+            GameActivity.soundPool.play(passSound, MainActivity.volume/SOUND_VOLUME_DIVIDER, MainActivity.volume/SOUND_VOLUME_DIVIDER, 0, 0, 1);
         }
     }
 
     @Override
     public void onCollision() {
         super.onCollision();
-        Game.soundPool.play(collideSound, MainActivity.volume/SOUND_VOLUME_DIVIDER, MainActivity.volume/SOUND_VOLUME_DIVIDER, 0, 0, 1);
+        GameActivity.soundPool.play(collideSound, MainActivity.volume/SOUND_VOLUME_DIVIDER, MainActivity.volume/SOUND_VOLUME_DIVIDER, 0, 0, 1);
     }
 
 }
