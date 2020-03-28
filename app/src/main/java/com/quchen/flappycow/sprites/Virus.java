@@ -25,7 +25,7 @@ public class Virus extends PowerUp {
     @Override
     public void onCollision() {
         super.onCollision();
-        gameActivity.decreaseCoin();
+        gameActivity.decreasePoints();
         view.changeToSick();
     }
 }

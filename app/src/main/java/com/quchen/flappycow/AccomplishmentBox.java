@@ -27,9 +27,7 @@ public class AccomplishmentBox {
      */
     public static final int BRONZE_POINTS = 10;
 
-    public static final String SAVE_NAME = "ACCOMBLISHMENTS";
-
-    public static final String ONLINE_STATUS_KEY = "online_status";
+    public static final String SAVE_NAME = "ACCOMPLISHMENTS";
 
     public static final String KEY_POINTS = "points";
     public static final String ACHIEVEMENT_KEY_50_COINS = "achievement_survive_5_minutes";
@@ -48,7 +46,7 @@ public class AccomplishmentBox {
     /**
      * Stores the score and achievements locally.
      * <p>
-     * The accomblishments will be saved local via SharedPreferences.
+     * The accomplishments will be saved local via SharedPreferences.
      * This makes it very easy to cheat.
      *
      * todo: is activity the right thing to pass in here?

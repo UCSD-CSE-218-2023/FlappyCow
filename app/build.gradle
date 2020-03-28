@@ -1,8 +1,16 @@
 apply plugin: 'com.android.application'
 
+ext {
+    v = [
+            cofoja: '1.3.1.5',
+    ]
+
+    cofoja = files("libs/cofoja-${v.cofoja}.jar")
+}
+
 android {
     compileSdkVersion 28
-    buildToolsVersion '29.0.2'
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.quchen.flappycow"
@@ -28,18 +36,41 @@ android {
         unitTests {
             includeAndroidResources = true
         }
+
+        unitTests.all {
+            jvmArgs "-ea", "-javaagent:./libs/cofoja-1.3.1.5.jar"
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        // Whenever we run javac, tell cofoja about the location of the Android stub jar.
+        // Note: extra_classpath is a CSE218 customization to cofoja, because we can't know
+        // (in this block) gthe actual classpath...
+        options.compilerArgs += [
+                "-Acom.google.java.contract.extra_classpath=" + files(
+                        "${android.sdkDirectory.path}/platforms/android-28/android.jar"
+                ).getAsPath()
+        ]
     }
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.browser:browser:1.2.0'
     implementation 'com.google.android.gms:play-services-ads:19.0.1'
+
+    // We need to run cofoja even on non-test sources.
+    implementation cofoja
+    annotationProcessor cofoja
 
     testImplementation 'junit:junit:4.13'
     testImplementation 'androidx.test:core:1.2.0'
     testImplementation 'org.robolectric:robolectric:4.3.1'
 
-    testAnnotationProcessor "com.google.auto.service:auto-service:1.0-rc4"
+    // We need this to actually _run_ contracts, so only in tests.
+    testImplementation 'org.ow2.asm:asm:8.0'
+    testImplementation cofoja
+
+    testAnnotationProcessor 'com.google.auto.service:auto-service:1.0-rc6'
+    testAnnotationProcessor cofoja
 }

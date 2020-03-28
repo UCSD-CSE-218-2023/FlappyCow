@@ -9,7 +9,9 @@ Quick starting guide:
 0. You need: Java SDK and Android Studio with Android SDK installed
 and downloaded important stuff via SDK Manager (like newest Android API).
 
-1. Clone this repository to your local drive: `git clone https://github.com/cubei/FlappyCow.git`
+**Note from TA:** Use our course repo, not this one :).
+
+1. Clone this repository to your local drive: ~~`git clone https://github.com/cubei/FlappyCow.git`~~
 
 2. Start Android Studio and open the synced repo as project.
 

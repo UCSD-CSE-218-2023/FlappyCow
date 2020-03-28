@@ -10,9 +10,9 @@ import androidx.lifecycle.Lifecycle;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
-public class MainActivityTest {
+public class UnitExampleTest {
     @Test
-    public void testSilly() {
+    public void testActivityResumes() {
         // GIVEN
         ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class);
 

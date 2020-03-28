@@ -20,6 +20,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
+import java.io.Console;
+
 public class GameActivity extends Activity {
     /**
      * Name of the SharedPreference that saves the medals
@@ -122,6 +124,9 @@ public class GameActivity extends Activity {
         if (musicPlayer == null) {
             // to avoid unnecessary reinitialisation
             musicPlayer = MediaPlayer.create(this, R.raw.nyan_cat_theme);
+            if (musicPlayer == null) {
+                return;
+            }
             musicPlayer.setLooping(true);
             musicPlayer.setVolume(MainActivity.volume, MainActivity.volume);
         }
@@ -139,7 +144,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onPause() {
         view.pause();
-        if (musicPlayer.isPlaying()) {
+        if (musicPlayer != null && musicPlayer.isPlaying()) {
             musicPlayer.pause();
         }
         super.onPause();
@@ -153,7 +158,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         view.drawOnce();
-        if (musicShouldPlay) {
+        if (musicPlayer != null && musicShouldPlay) {
             musicPlayer.start();
         }
         super.onResume();
@@ -225,6 +230,10 @@ public class GameActivity extends Activity {
                 }
             }
         }
+    }
+
+    public void decreasePoints() {
+        accomplishmentBox.points--;
     }
 
     /**

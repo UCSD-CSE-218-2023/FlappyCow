@@ -105,7 +105,6 @@ public abstract class PlayableCharacter extends Sprite {
         this.row = 0;
     }
 
-    // todo: Liskov would not like this.
     public void upgradeBitmap(int points) {
         // Change bitmap, maybe when a certain amount of point is reached.
     }
