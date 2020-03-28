@@ -24,7 +24,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
-public class Game extends BaseGameActivity{
+public class Game extends BaseGameActivity {
     /** Name of the SharedPreference that saves the medals */
     public static final String coin_save = "coin_save";
     
