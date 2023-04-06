@@ -1,6 +1,6 @@
 Flappy Cow
 ======
-![Banner](/graphics/funktionsgrafik.png)
+![Banner](/etc/graphics/funktionsgrafik.png)
 
 **Flappy Cow** is an Android gameActivity in "Flappy Bird" Style. Since Nguyen Ha Dong, the developer of "Flappy Bird", anounced [the end](http://www.forbes.com/sites/insertcoin/2014/02/08/flappy-bird-creator-says-hes-taking-the-gameActivity-down/) of his loved but also hated game I uploaded this Open Source game, so you have an alternative to fulfill your addiction.
 
@@ -9,7 +9,7 @@ Initially called Flappy Cow, it has now(v.1.83) been renamed to *FlutterCow* bec
 Make sure to check out [Space Cowboy](https://play.google.com/store/apps/details?id=edu.ucsd.spacecowboy) too!
 
 #### Screenshot
-![Sceenshot Flappy Cow](/graphics/screenshots/screenshot_phone_1.png) ![Sceenshot Flappy Cow](/graphics/screenshots/screenshot_phone_2.png)
+![Sceenshot Flappy Cow](/etc/graphics/screenshots/screenshot_phone_1.png) ![Sceenshot Flappy Cow](/etc/graphics/screenshots/screenshot_phone_2.png)
 
 #### Google Play Store
 [![Get it on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=edu.ucsd.flappycow)
