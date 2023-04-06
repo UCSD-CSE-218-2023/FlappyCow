@@ -294,12 +294,7 @@ public class GameActivity extends Activity {
     }
 
     private void setupAd() {
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
-                // no-op
-            }
-        });
+        MobileAds.initialize(this, initializationStatus -> { /* no-op */ });
 
         String adUnitId = getResources().getString(R.string.ad_unit_id);
 

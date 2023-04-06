@@ -7,7 +7,7 @@ import org.robolectric.RobolectricTestRunner;
 
 import androidx.lifecycle.Lifecycle;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
 public class UnitExampleTest {
@@ -22,7 +22,7 @@ public class UnitExampleTest {
 
         // THEN
         scenario.onActivity(activity -> {
-            assertThat("The main activity is not null." , activity != null);
+            assertNotNull(activity);
         });
     }
 }

@@ -3,8 +3,8 @@
     Copyright (c) <2014> <Lars Harmsen - Quchen>
 -->
 <resources>
-    <string name="app_id" translatable="false">4571445496029129</string>
+    <string name="app_id" translatable="false">5615758120938208</string>
 
-    <string name="ad_app_id" translatable="false">ca-app-pub-4571445496029129~5382655123</string> <!-- Google Admob -->
-    <string name="ad_unit_id" translatable="false">ca-app-pub-4571445496029129/3794241281</string> <!-- Google Admob -->
+    <string name="ad_app_id" translatable="false">ca-app-pub-5615758120938208~8730683579</string> <!-- Google Admob -->
+    <string name="ad_unit_id" translatable="false">ca-app-pub-5615758120938208/8958298370</string> <!-- Google Admob -->
 </resources>

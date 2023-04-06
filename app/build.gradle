@@ -2,13 +2,14 @@ apply plugin: 'com.android.application'
 
 ext {
     v = [
-            cofoja: '1.3.1.5',
+            cofoja: '1.3.1-20230406',
     ]
 
     cofoja = files("libs/cofoja-${v.cofoja}.jar")
 }
 
 android {
+    namespace 'edu.ucsd.flappycow'
     compileSdkVersion 33
 
     defaultConfig {
@@ -16,7 +17,13 @@ android {
         minSdkVersion 33
         targetSdkVersion 33
         versionCode 2023
-        versionName "3.4.0"
+        versionName "2023-Spring"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                argument "com.google.java.contract.extra_classpath", cofoja.asPath
+            }
+        }
     }
 
     buildTypes {
@@ -27,8 +34,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     testOptions {
@@ -36,41 +43,36 @@ android {
             includeAndroidResources = true
         }
 
+        // Run unit tests with Cofoja enabled.
         unitTests.all {
-            jvmArgs "-ea", "-javaagent:./libs/cofoja-1.3.1.5.jar"
+            jvmArgs "-ea", "-javaagent:./libs/cofoja-1.3.1-20230406.jar"
         }
-    }
-    namespace 'edu.ucsd.flappycow'
-
-    tasks.withType(JavaCompile).configureEach {
-        // Whenever we run javac, tell cofoja about the location of the Android stub jar.
-        // Note: extra_classpath is a CSE218 customization to cofoja, because we can't know
-        // (in this block) gthe actual classpath...
-        options.compilerArgs += [
-                "-Acom.google.java.contract.extra_classpath=" + files(
-                        "${android.sdkDirectory.path}/platforms/android-28/android.jar"
-                ).getAsPath()
-        ]
     }
 }
 
 dependencies {
+    // Core Dependencies
+    // -----------------
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.browser:browser:1.5.0'
     implementation 'com.google.android.gms:play-services-ads:22.0.0'
 
-    // We need to run cofoja even on non-test sources.
-    implementation cofoja
-    annotationProcessor cofoja
-
+    // Testing Dependencies
+    // --------------------
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'androidx.test:core:1.5.0'
     testImplementation 'org.robolectric:robolectric:4.9.2'
 
-    // We need this to actually _run_ contracts, so only in tests.
-    testImplementation 'org.ow2.asm:asm:8.0'
-    testImplementation cofoja
+    // Cofoja Dependencies
+    // -------------------
 
-    testAnnotationProcessor 'com.google.auto.service:auto-service:1.0-rc6'
+    // For implementation, we just need the annotation processor to work.
+    implementation cofoja
+    annotationProcessor cofoja
+
+    // While running tests, we want to evaluate contracts, so we also need
+    // ASM (and the test annotation processor as before).
+    testImplementation 'org.ow2.asm:asm:9.4'
+    testImplementation cofoja
     testAnnotationProcessor cofoja
 }
