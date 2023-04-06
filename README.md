@@ -2,7 +2,7 @@ Flappy Cow
 ======
 ![Banner](/graphics/funktionsgrafik.png)
 
-**Flappy Cow** is an Android gameActivity in "Flappy Bird" Style. Since Nguyen Ha Dong, the developer of "Flappy Bird", anounced [the end](http://www.forbes.com/sites/insertcoin/2014/02/08/flappy-bird-creator-says-hes-taking-the-gameActivity-down/) of his loved but also hated gameActivity I uploaded this Open Source gameActivity, so you have an alternative to fulfill your addiction.
+**Flappy Cow** is an Android gameActivity in "Flappy Bird" Style. Since Nguyen Ha Dong, the developer of "Flappy Bird", anounced [the end](http://www.forbes.com/sites/insertcoin/2014/02/08/flappy-bird-creator-says-hes-taking-the-gameActivity-down/) of his loved but also hated game I uploaded this Open Source game, so you have an alternative to fulfill your addiction.
 
 Initially called Flappy Cow, it has now(v.1.83) been renamed to *FlutterCow* because of [Googles policy on the word *Flappy* in app names](http://edition.cnn.com/2014/02/17/tech/mobile/flappy-apps-banned/)
 
