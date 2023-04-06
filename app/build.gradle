@@ -41,6 +41,7 @@ android {
             jvmArgs "-ea", "-javaagent:./libs/cofoja-1.3.1.5.jar"
         }
     }
+    namespace 'com.quchen.flappycow'
 
     tasks.withType(JavaCompile).configureEach {
         // Whenever we run javac, tell cofoja about the location of the Android stub jar.

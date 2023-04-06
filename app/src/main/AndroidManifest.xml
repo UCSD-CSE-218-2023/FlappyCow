@@ -4,8 +4,7 @@
     Copyright (c) <2014> <Lars Harmsen - Quchen>
 -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.quchen.flappycow">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Remove the following permissions, if you don't want ads -->
         <!-- Used to request banner and interstitial ads. -->
@@ -26,7 +25,7 @@
         <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-5615758120938208~8730683579"/>
         
         <activity
-            android:name=".MainActivity"
+            android:name="edu.ucsd.flappycow.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -36,7 +35,7 @@
         </activity>
         
         <activity
-            android:name=".GameActivity"
+            android:name="edu.ucsd.flappycow.GameActivity"
             android:label="@string/app_name"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:screenOrientation="portrait" >
@@ -47,7 +46,7 @@
         </activity>
         
         <activity
-            android:name=".About"
+            android:name="edu.ucsd.flappycow.About"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
