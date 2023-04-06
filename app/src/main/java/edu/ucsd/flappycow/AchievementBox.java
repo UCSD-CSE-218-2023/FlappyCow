@@ -48,7 +48,7 @@ public class AchievementBox {
      * <p>
      * The accomplishments will be saved local via SharedPreferences.
      * This makes it very easy to cheat.
-     *
+     * <p>
      * todo: is activity the right thing to pass in here?
      *
      * @param activity activity that is needed for shared preferences

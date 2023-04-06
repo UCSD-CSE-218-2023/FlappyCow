@@ -1,17 +1,17 @@
 /**
  * A Coin
- * 
+ *
  * @author Lars Harmsen
  * Copyright (c) <2014> <Lars Harmsen - Quchen>
  */
 
 package edu.ucsd.flappycow.sprites;
 
-import com.quchen.flappycow.*;
-import edu.ucsd.flappycow.GameActivity;
-
 import android.graphics.Bitmap;
 
+import edu.ucsd.flappycow.*;
+
+import edu.ucsd.flappycow.GameActivity;
 import edu.ucsd.flappycow.GameView;
 import edu.ucsd.flappycow.MainActivity;
 import edu.ucsd.flappycow.Util;
@@ -25,14 +25,14 @@ public class Coin extends PowerUp {
 
     public Coin(GameView view, GameActivity gameActivity) {
         super(view, gameActivity);
-        if(globalBitmap == null){
+        if (globalBitmap == null) {
             globalBitmap = Util.getScaledBitmapAlpha8(gameActivity, R.drawable.coin);
         }
         this.bitmap = globalBitmap;
-        this.width = this.bitmap.getWidth()/(colNr = 12);
+        this.width = this.bitmap.getWidth() / (colNr = 12);
         this.height = this.bitmap.getHeight();
         this.frameTime = 1;
-        if(sound == -1){
+        if (sound == -1) {
             sound = GameActivity.soundPool.load(gameActivity, R.raw.coin, 1);
         }
     }
@@ -46,11 +46,11 @@ public class Coin extends PowerUp {
         playSound();
         gameActivity.increaseCoin();
     }
-    
-    private void playSound(){
+
+    private void playSound() {
         GameActivity.soundPool.play(sound, MainActivity.volume, MainActivity.volume, 0, 0, 1);
     }
-    
+
     @Override
     public void move() {
         changeToNextFrame();

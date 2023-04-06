@@ -8,7 +8,7 @@ import edu.ucsd.flappycow.GameView;
 
 
 public class Accessory extends Sprite {
-    
+
     public Accessory(GameView view, GameActivity gameActivity) {
         super(view, gameActivity);
     }
@@ -17,8 +17,8 @@ public class Accessory extends Sprite {
         this.x = x;
         this.y = y;
     }
-    
-    public void setBitmap(Bitmap bitmap){
+
+    public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
         this.width = this.bitmap.getWidth();
         this.height = this.bitmap.getHeight();
@@ -26,7 +26,7 @@ public class Accessory extends Sprite {
 
     @Override
     public void draw(Canvas canvas) {
-        if(this.bitmap != null){
+        if (this.bitmap != null) {
             super.draw(canvas);
         }
     }

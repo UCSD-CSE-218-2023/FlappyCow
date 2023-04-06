@@ -8,8 +8,8 @@
 package edu.ucsd.flappycow;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 
 public class MainActivity extends Activity {
 

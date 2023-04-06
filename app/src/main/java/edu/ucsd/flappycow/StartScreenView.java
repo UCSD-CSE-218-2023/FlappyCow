@@ -14,7 +14,7 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.quchen.flappycow.R;
+import edu.ucsd.flappycow.R;
 
 public class StartScreenView extends View {
 
@@ -106,21 +106,21 @@ public class StartScreenView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         dstSplash = new Rect(0, 0, getWidth(), getHeight());
         dstPlay = new Rect((int) (getWidth() * REGION_PLAY[0]),
-                (int) (getHeight() * REGION_PLAY[1]),
-                (int) (getWidth() * REGION_PLAY[2]),
-                (int) (getHeight() * REGION_PLAY[3]));
+            (int) (getHeight() * REGION_PLAY[1]),
+            (int) (getWidth() * REGION_PLAY[2]),
+            (int) (getHeight() * REGION_PLAY[3]));
         dstSpeaker = new Rect((int) (getWidth() * REGION_SPEAKER[0]),
-                (int) (getHeight() * REGION_SPEAKER[1]),
-                (int) (getWidth() * REGION_SPEAKER[2]),
-                (int) (getHeight() * REGION_SPEAKER[3]));
+            (int) (getHeight() * REGION_SPEAKER[1]),
+            (int) (getWidth() * REGION_SPEAKER[2]),
+            (int) (getHeight() * REGION_SPEAKER[3]));
         dstInfo = new Rect((int) (getWidth() * REGION_INFO[0]),
-                (int) (getHeight() * REGION_INFO[1]),
-                (int) (getWidth() * REGION_INFO[2]),
-                (int) (getHeight() * REGION_INFO[3]));
+            (int) (getHeight() * REGION_INFO[1]),
+            (int) (getWidth() * REGION_INFO[2]),
+            (int) (getHeight() * REGION_INFO[3]));
         dstSocket = new Rect((int) (getWidth() * REGION_SOCKET[0]),
-                (int) (getHeight() * REGION_SOCKET[1]),
-                (int) (getWidth() * REGION_SOCKET[2]),
-                (int) (getHeight() * REGION_SOCKET[3]));
+            (int) (getHeight() * REGION_SOCKET[1]),
+            (int) (getWidth() * REGION_SOCKET[2]),
+            (int) (getHeight() * REGION_SOCKET[3]));
     }
 
     @Override
@@ -128,23 +128,23 @@ public class StartScreenView extends View {
         performClick();
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if ((event.getX() > REGION_PLAY[0] * getWidth())
-                    && (event.getX() < REGION_PLAY[2] * getWidth())
-                    && (event.getY() > REGION_PLAY[1] * getHeight())
-                    && (event.getY() < REGION_PLAY[3] * getHeight())) {
-                context.startActivity(new Intent("com.quchen.flappycow.Game"));
+                && (event.getX() < REGION_PLAY[2] * getWidth())
+                && (event.getY() > REGION_PLAY[1] * getHeight())
+                && (event.getY() < REGION_PLAY[3] * getHeight())) {
+                context.startActivity(new Intent("edu.ucsd.flappycow.Game"));
             } else if ((event.getX() > REGION_SPEAKER[0] * getWidth())
-                    && (event.getX() < REGION_SPEAKER[2] * getWidth())
-                    && (event.getY() > REGION_SPEAKER[1] * getHeight())
-                    && (event.getY() < REGION_SPEAKER[3] * getHeight())) {
+                && (event.getX() < REGION_SPEAKER[2] * getWidth())
+                && (event.getY() > REGION_SPEAKER[1] * getHeight())
+                && (event.getY() < REGION_SPEAKER[3] * getHeight())) {
                 if (context instanceof MainActivity) {
                     // todo: this seems really bad, hmm...
-                    ((MainActivity)context).muteToggle();
+                    ((MainActivity) context).muteToggle();
                 }
             } else if ((event.getX() > REGION_INFO[0] * getWidth())
-                    && (event.getX() < REGION_INFO[2] * getWidth())
-                    && (event.getY() > REGION_INFO[1] * getHeight())
-                    && (event.getY() < REGION_INFO[3] * getHeight())) {
-                context.startActivity(new Intent("com.quchen.flappycow.About"));
+                && (event.getX() < REGION_INFO[2] * getWidth())
+                && (event.getY() > REGION_INFO[1] * getHeight())
+                && (event.getY() < REGION_INFO[3] * getHeight())) {
+                context.startActivity(new Intent("edu.ucsd.flappycow.About"));
             }
         }
         return true;

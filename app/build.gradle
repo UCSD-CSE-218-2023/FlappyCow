@@ -9,14 +9,13 @@ ext {
 }
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 33
 
     defaultConfig {
-        applicationId "com.quchen.flappycow"
-        minSdkVersion 28
-        targetSdkVersion 28
-        versionCode 31
+        applicationId "edu.ucsd.flappycow"
+        minSdkVersion 33
+        targetSdkVersion 33
+        versionCode 2023
         versionName "3.4.0"
     }
 
@@ -41,7 +40,7 @@ android {
             jvmArgs "-ea", "-javaagent:./libs/cofoja-1.3.1.5.jar"
         }
     }
-    namespace 'com.quchen.flappycow'
+    namespace 'edu.ucsd.flappycow'
 
     tasks.withType(JavaCompile).configureEach {
         // Whenever we run javac, tell cofoja about the location of the Android stub jar.
@@ -56,17 +55,17 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.browser:browser:1.2.0'
-    implementation 'com.google.android.gms:play-services-ads:19.0.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.browser:browser:1.5.0'
+    implementation 'com.google.android.gms:play-services-ads:22.0.0'
 
     // We need to run cofoja even on non-test sources.
     implementation cofoja
     annotationProcessor cofoja
 
-    testImplementation 'junit:junit:4.13'
-    testImplementation 'androidx.test:core:1.2.0'
-    testImplementation 'org.robolectric:robolectric:4.3.1'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.test:core:1.5.0'
+    testImplementation 'org.robolectric:robolectric:4.9.2'
 
     // We need this to actually _run_ contracts, so only in tests.
     testImplementation 'org.ow2.asm:asm:8.0'

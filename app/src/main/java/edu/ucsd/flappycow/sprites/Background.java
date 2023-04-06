@@ -1,29 +1,30 @@
 /**
  * Manages the Bitmap for the background
- * 
+ *
  * @author Lars Harmsen
  * Copyright (c) <2014> <Lars Harmsen - Quchen>
  */
 
 package edu.ucsd.flappycow.sprites;
 
-import edu.ucsd.flappycow.GameActivity;
-import edu.ucsd.flappycow.GameView;
-import com.quchen.flappycow.R;
-import edu.ucsd.flappycow.Util;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+
+import edu.ucsd.flappycow.R;
+
+import edu.ucsd.flappycow.GameActivity;
+import edu.ucsd.flappycow.GameView;
+import edu.ucsd.flappycow.Util;
 
 public class Background extends Sprite {
 
     /** Static bitmap to reduce memory usage */
     public static Bitmap globalBitmap;
-    
+
     public Background(GameView view, GameActivity gameActivity) {
         super(view, gameActivity);
-        
-        if(globalBitmap == null){
+
+        if (globalBitmap == null) {
             globalBitmap = Util.getDownScaledBitmapAlpha8(gameActivity, R.drawable.bg);
         }
         this.bitmap = globalBitmap;
@@ -38,19 +39,19 @@ public class Background extends Sprite {
     @Override
     public void draw(Canvas canvas) {
         double factor = (1.0 * canvas.getHeight()) / bitmap.getHeight();
-        
-        if(-x > bitmap.getWidth()){
+
+        if (-x > bitmap.getWidth()) {
             // The first bitmap is completely out of the screen
             x += bitmap.getWidth();
         }
-        
+
         int endBitmap = Math.min(-x + (int) (canvas.getWidth() / factor), bitmap.getWidth());
         int endCanvas = (int) ((endBitmap + x) * factor) + 1;
         src.set(-x, 0, endBitmap, bitmap.getHeight());
         dst.set(0, 0, endCanvas, canvas.getHeight());
         canvas.drawBitmap(this.bitmap, src, dst, null);
-        
-        if(endBitmap == bitmap.getWidth()){
+
+        if (endBitmap == bitmap.getWidth()) {
             // draw second bitmap
             src.set(0, 0, (int) (canvas.getWidth() / factor), bitmap.getHeight());
             dst.set(endCanvas, 0, endCanvas + canvas.getWidth(), canvas.getHeight());

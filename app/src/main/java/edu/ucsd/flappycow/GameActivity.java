@@ -8,10 +8,6 @@
 package edu.ucsd.flappycow;
 
 import android.app.Activity;
-import com.google.ads.mediation.admob.AdMobAdapter;
-import com.google.android.gms.ads.*;
-import com.quchen.flappycow.R;
-
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -19,7 +15,21 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.ads.mediation.admob.AdMobAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+
 
 public class GameActivity extends Activity {
     /**
@@ -42,7 +52,6 @@ public class GameActivity extends Activity {
      * Counts number of played games
      */
     private static int gameOverCounter = 1;
-    private InterstitialAd interstitial;
 
     /**
      * Will play songs like:
@@ -99,6 +108,11 @@ public class GameActivity extends Activity {
      */
     GameOverDialog gameOverDialog;
 
+    /**
+     * Interstitial ad.
+     */
+    private InterstitialAd interstitial;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,7 +136,7 @@ public class GameActivity extends Activity {
     public void initMusicPlayer() {
         if (musicPlayer == null) {
             // to avoid unnecessary reinitialisation
-            musicPlayer = MediaPlayer.create(this, com.quchen.flappycow.R.raw.nyan_cat_theme);
+            musicPlayer = MediaPlayer.create(this, R.raw.nyan_cat_theme);
             if (musicPlayer == null) {
                 return;
             }
@@ -172,7 +186,7 @@ public class GameActivity extends Activity {
             super.onBackPressed();
         } else {
             backPressed = System.currentTimeMillis();
-            Toast.makeText(this, getResources().getString(com.quchen.flappycow.R.string.on_back_press), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.on_back_press), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -184,7 +198,7 @@ public class GameActivity extends Activity {
         if (gameOverCounter % GAMES_PER_AD == 0) {
             handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_AD));
         } else {
-            handler.sendMessage(Message.obtain(handler, MyHandler.GAME_OVER_DIALOG));
+            handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_GAME_OVER_DIALOG));
         }
 
     }
@@ -193,7 +207,7 @@ public class GameActivity extends Activity {
         this.coins++;
         if (coins >= 50 && !accomplishmentBox.achievement_50_coins) {
             accomplishmentBox.achievement_50_coins = true;
-            handler.sendMessage(Message.obtain(handler, 1, com.quchen.flappycow.R.string.toast_achievement_50_coins, MyHandler.SHOW_TOAST));
+            handler.sendMessage(Message.obtain(handler, 1, R.string.toast_achievement_50_coins, MyHandler.SHOW_TOAST));
         }
     }
 
@@ -212,19 +226,19 @@ public class GameActivity extends Activity {
         if (accomplishmentBox.points >= AchievementBox.BRONZE_POINTS) {
             if (!accomplishmentBox.achievement_bronze) {
                 accomplishmentBox.achievement_bronze = true;
-                handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, com.quchen.flappycow.R.string.toast_achievement_bronze, MyHandler.SHOW_TOAST));
+                handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_bronze, MyHandler.SHOW_TOAST));
             }
 
             if (accomplishmentBox.points >= AchievementBox.SILVER_POINTS) {
                 if (!accomplishmentBox.achievement_silver) {
                     accomplishmentBox.achievement_silver = true;
-                    handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, com.quchen.flappycow.R.string.toast_achievement_silver, MyHandler.SHOW_TOAST));
+                    handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_silver, MyHandler.SHOW_TOAST));
                 }
 
                 if (accomplishmentBox.points >= AchievementBox.GOLD_POINTS) {
                     if (!accomplishmentBox.achievement_gold) {
                         accomplishmentBox.achievement_gold = true;
-                        handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, com.quchen.flappycow.R.string.toast_achievement_gold, MyHandler.SHOW_TOAST));
+                        handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_gold, MyHandler.SHOW_TOAST));
                     }
                 }
             }
@@ -238,12 +252,12 @@ public class GameActivity extends Activity {
     /**
      * Shows the GameOverDialog when a message with code 0 is received.
      */
-    static class MyHandler extends Handler {
-        public static final int GAME_OVER_DIALOG = 0;
+    class MyHandler extends Handler {
+        public static final int SHOW_GAME_OVER_DIALOG = 0;
         public static final int SHOW_TOAST = 1;
         public static final int SHOW_AD = 2;
 
-        private GameActivity gameActivity;
+        private final GameActivity gameActivity;
 
         public MyHandler(GameActivity gameActivity) {
             this.gameActivity = gameActivity;
@@ -252,27 +266,23 @@ public class GameActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case GAME_OVER_DIALOG:
+                case SHOW_GAME_OVER_DIALOG:
                     showGameOverDialog();
                     break;
                 case SHOW_TOAST:
                     Toast.makeText(gameActivity, msg.arg1, Toast.LENGTH_SHORT).show();
                     break;
                 case SHOW_AD:
-                    showAd();
+                    showAdIfAvailable();
                     break;
             }
         }
 
-        private void showAd() {
+        private void showAdIfAvailable() {
             if (gameActivity.interstitial == null) {
                 showGameOverDialog();
             } else {
-                if (gameActivity.interstitial.isLoaded()) {
-                    gameActivity.interstitial.show();
-                } else {
-                    showGameOverDialog();
-                }
+                gameActivity.interstitial.show(GameActivity.this);
             }
         }
 
@@ -284,27 +294,46 @@ public class GameActivity extends Activity {
     }
 
     private void setupAd() {
-        MobileAds.initialize(this, getResources().getString(com.quchen.flappycow.R.string.ad_app_id));
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+                // no-op
+            }
+        });
 
-        interstitial = new InterstitialAd(this);
-        interstitial.setAdUnitId(getResources().getString(R.string.ad_unit_id));
+        String adUnitId = getResources().getString(R.string.ad_unit_id);
 
-        Bundle extras = new Bundle();
         // Make sure only adds appropriate for children of all ages are displayed.
+        Bundle extras = new Bundle();
         extras.putString("max_ad_content_rating", "G");
 
         AdRequest adRequest = new AdRequest.Builder()
-                .addNetworkExtrasBundle(AdMobAdapter.class, extras)
-                .build();
+            .addNetworkExtrasBundle(AdMobAdapter.class, extras)
+            .build();
 
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new MyAdListener());
-    }
+        InterstitialAd.load(this, adUnitId, adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                Log.i("Ads", "Ad was loaded.");
+                interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+                        handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_GAME_OVER_DIALOG));
+                    }
+                });
+                GameActivity.this.interstitial = interstitialAd;
+            }
 
-
-    private class MyAdListener extends AdListener {
-        public void onAdClosed() {
-            handler.sendMessage(Message.obtain(handler, MyHandler.GAME_OVER_DIALOG));
-        }
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                if (loadAdError.getCode() == AdRequest.ERROR_CODE_NO_FILL) {
+                    Log.i("Ads", "No ad was available.");
+                } else {
+                    Log.i("Ads", "Ad failed to load.");
+                }
+                Log.d("Ads", loadAdError.toString());
+                GameActivity.this.interstitial = null;
+            }
+        });
     }
 }

@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.quchen.flappycow.R;
+import edu.ucsd.flappycow.R;
 
 public class GameOverDialog extends Dialog {
     public static final int REVIVE_PRICE = 5;
@@ -62,8 +62,8 @@ public class GameOverDialog extends Dialog {
 
         Button reviveButton = (Button) findViewById(R.id.b_revive);
         reviveButton.setText(gameActivity.getResources().getString(R.string.revive_button)
-                + " " + REVIVE_PRICE * gameActivity.numberOfRevive + " "
-                + gameActivity.getResources().getString(R.string.coins));
+            + " " + REVIVE_PRICE * gameActivity.numberOfRevive + " "
+            + gameActivity.getResources().getString(R.string.coins));
         reviveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

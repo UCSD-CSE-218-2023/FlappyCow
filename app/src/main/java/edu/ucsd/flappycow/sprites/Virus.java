@@ -1,9 +1,11 @@
 package edu.ucsd.flappycow.sprites;
 
 import android.graphics.Bitmap;
+
+import edu.ucsd.flappycow.R;
+
 import edu.ucsd.flappycow.GameActivity;
 import edu.ucsd.flappycow.GameView;
-import com.quchen.flappycow.R;
 import edu.ucsd.flappycow.Util;
 
 public class Virus extends PowerUp {
@@ -11,7 +13,7 @@ public class Virus extends PowerUp {
 
     public Virus(GameView view, GameActivity gameActivity) {
         super(view, gameActivity);
-        if(globalBitmap == null){
+        if (globalBitmap == null) {
             globalBitmap = Util.getScaledBitmapAlpha8(gameActivity, R.drawable.virus);
         }
         this.bitmap = globalBitmap;

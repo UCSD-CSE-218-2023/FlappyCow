@@ -1,31 +1,32 @@
 /**
  * A yummy toast
- * 
+ *
  * @author Lars Harmsen
  * Copyright (c) <2014> <Lars Harmsen - Quchen>
  */
 
 package edu.ucsd.flappycow.sprites;
 
-import edu.ucsd.flappycow.GameActivity;
-import edu.ucsd.flappycow.GameView;
-import com.quchen.flappycow.R;
-import edu.ucsd.flappycow.Util;
-
 import android.graphics.Bitmap;
 
+import edu.ucsd.flappycow.R;
+
+import edu.ucsd.flappycow.GameActivity;
+import edu.ucsd.flappycow.GameView;
+import edu.ucsd.flappycow.Util;
+
 public class Toast extends PowerUp {
-    
+
     /**
      * Static bitmap to reduce memory usage.
      */
     public static Bitmap globalBitmap;
-    
+
     public static final int POINTS_TO_TOAST = 42;
 
     public Toast(GameView view, GameActivity gameActivity) {
         super(view, gameActivity);
-        if(globalBitmap == null){
+        if (globalBitmap == null) {
             globalBitmap = Util.getScaledBitmapAlpha8(gameActivity, R.drawable.toast);
         }
         this.bitmap = globalBitmap;
@@ -41,6 +42,6 @@ public class Toast extends PowerUp {
         super.onCollision();
         view.changeToNyanCat();
     }
-    
-    
+
+
 }

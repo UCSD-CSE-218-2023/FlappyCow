@@ -8,14 +8,6 @@
 
 package edu.ucsd.flappycow;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import com.quchen.flappycow.R;
-import com.quchen.flappycow.sprites.*;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -25,6 +17,14 @@ import android.os.Message;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import edu.ucsd.flappycow.R;
+import edu.ucsd.flappycow.sprites.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import edu.ucsd.flappycow.sprites.Background;
 import edu.ucsd.flappycow.sprites.Coin;
@@ -112,7 +112,7 @@ public class GameView extends SurfaceView {
     public boolean onTouchEvent(MotionEvent event) {
         performClick();
         if (event.getAction() == MotionEvent.ACTION_DOWN  // Only for "touchdowns"
-                && !this.player.isDead()) { // No support for dead players
+            && !this.player.isDead()) { // No support for dead players
             if (tutorialIsShown) {
                 // dismiss tutorial
                 tutorialIsShown = false;
@@ -223,6 +223,7 @@ public class GameView extends SurfaceView {
     /**
      * Draws everything normal,
      * except the player will only be drawn, when the parameter is true
+     *
      * @param drawPlayer
      */
     private void drawCanvas(Canvas canvas, boolean drawPlayer) {
@@ -244,8 +245,8 @@ public class GameView extends SurfaceView {
         paint.setColor(Color.BLACK);
         paint.setTextSize(getScoreTextMetrics());
         canvas.drawText(gameActivity.getResources().getString(R.string.onscreen_score_text) + " " + gameActivity.accomplishmentBox.points
-                        + " / " + gameActivity.getResources().getString(R.string.onscreen_coin_text) + " " + gameActivity.coins,
-                0, getScoreTextMetrics(), paint);
+                + " / " + gameActivity.getResources().getString(R.string.onscreen_coin_text) + " " + gameActivity.coins,
+            0, getScoreTextMetrics(), paint);
     }
 
     /**

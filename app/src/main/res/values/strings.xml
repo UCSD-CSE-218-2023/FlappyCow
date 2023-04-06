@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     @author Lars Harmsen
     Copyright (c) <2014> <Lars Harmsen - Quchen>
 -->
 <resources>
-    <string name="app_name" translatable="false">Flutter Cow</string>
+    <string name="app_name" translatable="false">Flappy Cow</string>
     <string name="current_score">Your score is</string>
     <string name="best_score">Your best score is</string>
     <string name="defaultscore" translatable="false">42</string>
